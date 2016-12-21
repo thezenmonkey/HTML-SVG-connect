@@ -160,8 +160,8 @@
       if (this.$svg.attr("width") < (Math.max(startX, endX) + stroke)) this.$svg.attr("width", (Math.max(startX, endX) + stroke));
       if (this.$svg.attr("height") < (Math.max(startY, endY) + stroke)) this.$svg.attr("height", (Math.max(startY, endY) + stroke));
 
-      var deltaX = (Math.max(startX, endX) - Math.min(startX, endX)) * 0.15;
-      var deltaY = (Math.max(startY, endY) - Math.min(startY, endY)) * 0.15;
+      var deltaX = (Math.max(startX, endX) - Math.min(startX, endX));
+      var deltaY = (Math.max(startY, endY) - Math.min(startY, endY));
       // For further calculations whichever is the shortest distance.
       var delta = Math.min(deltaY, deltaX);
       // Set sweep-flag (counter/clockwise)
@@ -178,10 +178,10 @@
         // Draw the pipe-like path
         // 1. move a bit right, 2. arch, 3. move a bit down, 4.arch, 5. move right to the end
         $path.attr("d", "M" + startX + " " + startY +
-          " H" + (startX + offset + delta) +
-          " A" + delta + " " + delta + " 0 0 " + arc1 + " " + (startX + offset + 2 * delta) + " " + (startY + delta * sigY) +
-          " V" + (endY - delta * sigY) +
-          " A" + delta + " " + delta + " 0 0 " + arc2 + " " + (startX + offset + 3 * delta) + " " + endY +
+          " H" + (startX + offset + (deltaX/2)) +
+          //" A" + delta + " " + delta + " 0 0 " + arc1 + " " + (startX + offset + 2 * delta) + " " + (startY + delta * sigY) +
+          " V" + (endY ) +
+          //" A" + delta + " " + delta + " 0 0 " + arc2 + " " + (startX + offset + 3 * delta) + " " + endY +
           " H" + endX);
       } else {
         //Horizontal
@@ -195,10 +195,10 @@
         // Draw the pipe-like path
         // 1. move a bit down, 2. arch, 3. move a bit to the right, 4.arch, 5. move down to the end
         $path.attr("d", "M" + startX + " " + startY +
-          " V" + (startY + offset + delta) +
-          " A" + delta + " " + delta + " 0 0 " + arc1 + " " + (startX + delta * sigX) + " " + (startY + offset + 2 * delta) +
-          " H" + (endX - delta * sigX) +
-          " A" + delta + " " + delta + " 0 0 " + arc2 + " " + endX + " " + (startY + offset + 3 * delta) +
+          " V" + (startY + offset + (deltaY/2)) +
+          //" A" + delta + " " + delta + " 0 0 " + arc1 + " " + (startX + delta * sigX) + " " + (startY + offset + 2 * delta) +
+          " H" + (endX  * sigX) +
+          //" A" + delta + " " + delta + " 0 0 " + arc2 + " " + endX + " " + (startY + offset + 3 * delta) +
           " V" + endY);
       }
     },
